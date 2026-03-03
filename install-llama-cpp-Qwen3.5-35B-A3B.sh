@@ -61,9 +61,12 @@ fi
 mkdir -p /workspace/models
 cd /workspace/models
 
+# hf download required hftransfer needs some pip install
+
+
 if [ ! -f "Qwen3.5-35B-A3B-Q5_K_M.gguf" ]; then
   echo "Downloading Qwen3.5-35B-A3B-Q5_K_M.gguf (~42 GB)..."
-  huggingface-cli download bartowski/Qwen_Qwen3.5-35B-A3B-GGUF Qwen3.5-35B-A3B-Q5_K_M.gguf --local-dir .
+  huggingface-cli download bartowski/Qwen_Qwen3.5-35B-A3B-GGUF Qwen_Qwen3.5-35B-A3B-Q5_K_M.gguf --local-dir .
 fi
 
 # 5. Start the server as daemon
@@ -72,7 +75,7 @@ pkill -f llama-server || true
 sleep 2
 
 nohup /workspace/llama.cpp/build/bin/llama-server \
-  -m /workspace/models/Qwen3.5-35B-A3B-Q5_K_M.gguf \
+  -m /workspace/Qwen_Qwen3.5-35B-A3B-Q5_K_M.gguf \
   -c 32768 \
   --host 0.0.0.0 \
   --port 8000 \
