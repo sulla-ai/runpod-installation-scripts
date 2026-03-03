@@ -1,9 +1,9 @@
-# vllm-5090-DeepSeek-R1-Distill-Qwen-7B
+# Runpod Installation Scripts
 
-One-line remote install + launch (run on your RunPod shell):
+Qwen2.5-72B-Instruct-Q4_K_M running with llama.cpp
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sulla-ai/custom-gpu-server-config/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/sulla-ai/runpod-installation-scripts/main/Qwen2.5-72B-Instruct-Q4_K_M | bash
 ```
 
 Local repo usage:
