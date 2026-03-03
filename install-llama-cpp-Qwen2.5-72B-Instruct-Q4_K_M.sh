@@ -1,4 +1,38 @@
 #!/bin/bash
+# =============================================================================
+# Qwen2.5-72B-Instruct-Q4_K_M + llama.cpp Server Setup
+# =============================================================================
+#
+# Model:          Qwen2.5-72B-Instruct-Q4_K_M.gguf
+# Quantization:   4-bit K-quant (excellent quality/size balance)
+# Backend:        llama.cpp (stable single-GPU inference, OpenAI-compatible API)
+# @see:           https://huggingface.co/bartowski/Qwen2.5-72B-Instruct-GGUF
+#
+# Target Hardware:
+#   NVIDIA RTX Pro 6000 (96 GB VRAM) — Single GPU
+#
+# Resource Requirements & Fit:
+#   - Disk Space:     ~47.5 GB (model file) + ~5–8 GB overhead = ~55 GB recommended
+#   - VRAM Usage:     ~54–58 GB (full offload + 32k context)
+#   - Free VRAM:      ~38–42 GB remaining (plenty of headroom for batching & agents)
+#   - VRAM Utilization: ~57% (as currently observed)
+#
+# Expected Capacity:
+#   - 200 – 350+ concurrent OpenClaw / Sulla agents
+#   - Strong reasoning and tool-use performance
+#   - Monthly cost on current RunPod: ~$490–$550
+#
+# What this script does:
+#   1. Installs dependencies and builds latest llama.cpp with CUDA
+#   2. Downloads the Qwen2.5-72B Q4_K_M model
+#   3. Launches the server as a persistent daemon on port 8000
+#
+# Endpoint for all agents:
+#   https://YOUR-POD-ID-8000.proxy.runpod.net/v1
+#
+# Created for: RunPod RTX Pro 6000 deployment
+# Last Updated: March 2026
+# =============================================================================
 set -e
 
 echo "=== Starting full setup for Qwen2.5-72B-Instruct-Q4_K_M.gguf ==="
