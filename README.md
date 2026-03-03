@@ -13,6 +13,12 @@ Qwen2.5-72B-Instruct-Q6_K running with llama.cpp
 curl -fsSL https://raw.githubusercontent.com/sulla-ai/runpod-installation-scripts/main/install-llama-cpp-Qwen2.5-72B-Instruct-Q6_K.sh | bash
 ```
 
+Qwen3.5-35B-A3B running with llama.cpp
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/sulla-ai/runpod-installation-scripts/main/install-llama-cpp-Qwen3.5-35B-A3B.sh | bash
+```
+
 
 
 
