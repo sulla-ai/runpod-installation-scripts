@@ -3,7 +3,7 @@
 One-line remote install + launch (run on your RunPod shell):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sulla-ai/vllm-5090-DeepSeek-R1-Distill-Qwen-7B/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/sulla-ai/custom-gpu-server-config/main/install.sh | bash
 ```
 
 Local repo usage:
