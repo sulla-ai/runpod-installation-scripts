@@ -73,7 +73,7 @@ nohup "${LLAMA_DIR}/build/bin/llama-server" \
     --cache-type-k q8_0 \
     --cache-type-v q8_0 \
     -np "$PARALLEL" \
-    --flash-attn \
+    --flash-attn on \
     --no-mmap \
     > /tmp/llama.log 2>&1 &
 
