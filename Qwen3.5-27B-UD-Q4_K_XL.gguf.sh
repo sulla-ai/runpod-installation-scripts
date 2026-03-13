@@ -7,7 +7,7 @@ MODEL_URL="https://huggingface.co/unsloth/Qwen3.5-27B-GGUF/resolve/main/${MODEL_
 MODEL_PATH="${MODEL_DIR}/${MODEL_FILE}"
 LLAMA_DIR="/workspace/llama.cpp"
 PORT=8000
-CONTEXT_SIZE=16384
+CONTEXT_SIZE=32768
 GPU_LAYERS=99
 PARALLEL=1
 
