@@ -1,4 +1,5 @@
 #!/bin/bash
+# NOTE: When creating the RunPod pod, expose port 8000 as HTTP in the pod template.
 set -e
 
 MODEL_DIR="/workspace/models"
@@ -10,7 +11,6 @@ PORT=8000
 CONTEXT_SIZE=32768
 GPU_LAYERS=99
 PARALLEL=1
-RUNPOD_EXPOSE_PORT=8000
 
 echo "============================================="
 echo " llama.cpp + Qwen3.5-27B Setup (5090)"
@@ -60,18 +60,6 @@ echo "  Port:     ${PORT}"
 echo "  GPU:      all layers offloaded"
 echo "  no-mmap:  on (required for RunPod network filesystem)"
 echo ""
-
-# --- Expose port via RunPod API ---
-if [ -n "${RUNPOD_POD_ID:-}" ] && [ -n "${RUNPOD_API_KEY:-}" ]; then
-    echo "Exposing port ${RUNPOD_EXPOSE_PORT} via RunPod API..."
-    curl -s -X POST "https://api.runpod.io/graphql?api_key=${RUNPOD_API_KEY}" \
-        -H "Content-Type: application/json" \
-        -d "{\"query\": \"mutation { podEditJob(input: { podId: \\\"${RUNPOD_POD_ID}\\\", ports: \\\"${RUNPOD_EXPOSE_PORT}/http\\\" }) { id } }\"}" \
-        > /dev/null 2>&1 && echo "       Port ${RUNPOD_EXPOSE_PORT} exposed." || echo "       WARNING: Failed to expose port via API."
-elif [ -n "${RUNPOD_POD_ID:-}" ]; then
-    echo "WARNING: RUNPOD_API_KEY not set. Port ${RUNPOD_EXPOSE_PORT} may not be accessible externally."
-    echo "         Set RUNPOD_API_KEY as an environment variable in your pod template."
-fi
 
 # Kill any existing server
 pkill -f llama-server || true
